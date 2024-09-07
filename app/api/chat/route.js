@@ -22,8 +22,10 @@ User Engagement: Encourage users to ask further questions if they need more clar
 Legal Disclaimer: When necessary, remind users that you do not provide personalized financial advice and recommend consulting with a financial advisor for specific investment decisions.`;
 
 export async function POST(req) {
+  const OPENAI_API_KEY =
+    "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";
   const openai = new OpenAI({
-    apiKey: "",
+    apiKey: OPENAI_API_KEY,
   });
 
   const data = await req.json();
