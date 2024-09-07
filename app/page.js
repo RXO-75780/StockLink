@@ -17,14 +17,6 @@ const Home = () => {
     fetchCount();
   }, []);
 
-  const handleJoinWaitlist = async (event) => {
-    event.preventDefault(); // Prevent default form submission
-    await fetch("/api/waitlist/join", {
-      method: "POST",
-    });
-    router.push("/assistant"); // Redirect after joining the waitlist
-  };
-
   const pushToSignUPage = () => {
     router.push("/sign-in");
   };
@@ -39,7 +31,7 @@ const Home = () => {
 
         <div className={styles.signInDiv}>
           <button className={styles.signIn} onClick={pushToSignUPage}>
-            SignIn
+            SignUp
           </button>
           <button className={styles.signIn} onClick={pushToSignUPage}>
             Login
@@ -53,7 +45,6 @@ const Home = () => {
             Try Now
           </button>
         </div>
-        <p className={styles.counter}>Current waitlist count: {count}</p>
       </section>
 
       {/* Features Section */}
@@ -210,9 +201,9 @@ const Home = () => {
           Sign up now and be the first to experience the future of stock
           trading.
         </p>
-        <form onSubmit={handleJoinWaitlist}>
+        <form onSubmit={pushToLogInPage}>
           <input type="email" placeholder="Enter your email" required />
-          <input type="submit" value="Sign In" />
+          <input type="submit" value="Sign Up" />
         </form>
       </section>
     </div>

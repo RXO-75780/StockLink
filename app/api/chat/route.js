@@ -22,10 +22,10 @@ User Engagement: Encourage users to ask further questions if they need more clar
 Legal Disclaimer: When necessary, remind users that you do not provide personalized financial advice and recommend consulting with a financial advisor for specific investment decisions.`;
 
 export async function POST(req) {
-  const OPENAI_API_KEY =
-    "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";
+  // const OPENAI_API_KEY =
+  //   "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";
   const openai = new OpenAI({
-    apiKey: OPENAI_API_KEY,
+    apiKey: process.env.OPENAI_API_KEY,
   });
 
   const data = await req.json();
