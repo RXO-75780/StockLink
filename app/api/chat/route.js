@@ -23,7 +23,7 @@ Legal Disclaimer: When necessary, remind users that you do not provide personali
 
 export async function POST(req) {
   const OPENAI_API_KEY =
-    "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";
+    "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";
   const openai = new OpenAI({
     apiKey: OPENAI_API_KEY,
   });

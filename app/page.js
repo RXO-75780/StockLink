@@ -28,11 +28,23 @@ const Home = () => {
   const pushToSignUPage = () => {
     router.push("/sign-in");
   };
+  const pushToLogInPage = () => {
+    router.push("/sign-in");
+  };
 
   return (
     <div className={styles.container}>
       <section className={styles.heroSection}>
         <h1>Welcome to StockLink</h1>
+
+        <div className={styles.signInDiv}>
+          <button className={styles.signIn} onClick={pushToSignUPage}>
+            SignIn
+          </button>
+          <button className={styles.signIn} onClick={pushToSignUPage}>
+            Login
+          </button>
+        </div>
 
         <h2>Join the Revolution in Stock Trading</h2>
         <p>Get real-time insights and advice directly from the stock chart.</p>

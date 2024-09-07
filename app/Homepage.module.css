@@ -6,6 +6,7 @@
   color: #f8f9fa;
   border: 1px solid #00ffff; /* Border */
   box-shadow: 0 0 10px #00ffff; /* Box shadow */
+  position: relative;
 }
 
 /* Hero Section */
@@ -35,6 +36,30 @@
   margin-bottom: 20px;
 }
 
+.signInDiv {
+  display: flex;
+  gap: 20px;
+  position: absolute;
+  top: 30px;
+  right: 50px;
+}
+
+.signIn {
+  font-size: 20px;
+  padding: 10px;
+  background-color: #00ffff;
+  color: #000;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.signIn:hover {
+  background-color: #00ffff;
+  color: #000;
+  cursor: pointer;
+  transform: translateY(-10px); /* Elevate up */
+  box-shadow: 0 0 20px #e6f7ff; /* Enhanced shadow for elevation effect */
+  transition: 0.3s all;
+}
 .ctaButtons {
   display: flex;
   justify-content: center;
@@ -42,7 +67,7 @@
 }
 
 .joinNow {
-  background-color: #e67700;
+  background-color: #00ffff;
   color: #0a0a0a;
   padding: 15px 30px;
   border: none;
@@ -53,7 +78,7 @@
 
 .joinNow:hover {
   transform: translateY(-10px); /* Elevate up */
-  box-shadow: 0 0 20px #00ffff; /* Enhanced shadow for elevation effect */
+  box-shadow: 0 0 20px #e6f7ff; /* Enhanced shadow for elevation effect */
   transition: 0.3s all;
 }
 
@@ -248,7 +273,7 @@
 }
 
 .waitlistSection form input[type="submit"] {
-  background-color: #e67700;
+  background-color: #00ffff;
   color: #0a0a0a;
   padding: 15px 30px;
   border: none;
@@ -259,6 +284,6 @@
 
 .waitlistSection:hover form input[type="submit"] {
   transform: translateY(-10px); /* Elevate up */
-  box-shadow: 0 0 20px #00ffff; /* Enhanced shadow for elevation effect */
+  box-shadow: 0 0 20px #f8f9fa; /* Enhanced shadow for elevation effect */
   transition: 0.3s all;
 }
