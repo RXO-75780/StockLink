@@ -15,7 +15,13 @@ import {
   Drawer,
   Typography,
 } from "@mui/material";
-import { OpenIcon, CloseIcon, GraphIcon } from "../components/icons";
+import {
+  OpenIcon,
+  CloseIcon,
+  GraphIcon,
+  AssistantIcon,
+  FolderIcon,
+} from "../components/icons";
 import { auth } from "../firebase";
 
 export default function Page() {
@@ -127,9 +133,11 @@ export default function Page() {
           <List>
             <ListItemButton onClick={() => handleNavigation("/assistant")}>
               <ListItemText primary="AI Assistant" />
+              <AssistantIcon />
             </ListItemButton>
             <ListItemButton onClick={() => handleNavigation("/conversations")}>
               <ListItemText primary="Conversations" />
+              <FolderIcon />
             </ListItemButton>
           </List>
 

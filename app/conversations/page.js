@@ -12,10 +12,23 @@ import {
 import useStockStore from "../useUserstore";
 import StockChartWidget from "../components/StockChartWidget";
 import { useState, useEffect } from "react";
-import { OpenIcon, CloseIcon, GraphIcon } from "../components/icons";
+import {
+  OpenIcon,
+  CloseIcon,
+  GraphIcon,
+  DeleteIcon,
+  FolderIcon,
+  AssistantIcon,
+} from "../components/icons";
 import { useRouter } from "next/navigation";
 import { auth, db } from "../firebase"; // Adjust import based on your setup
-import { collection, doc, getDocs, getDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  getDoc,
+  deleteDoc,
+} from "firebase/firestore";
 
 export default function Conversations() {
   const {
@@ -86,6 +99,24 @@ export default function Conversations() {
         setSelectedFile(conversationSnapshot.data().messages);
       } else {
         alert("No conversation found.");
+      }
+    } else {
+      alert("No user is logged in.");
+    }
+  };
+
+  const handleDeleteConversation = async (filename) => {
+    const user = auth.currentUser;
+    if (user) {
+      const userDocRef = doc(db, "users", user.uid);
+      const conversationRef = doc(userDocRef, "conversations", filename);
+      try {
+        await deleteDoc(conversationRef);
+        alert("Conversation deleted successfully.");
+        setFilenames(filenames.filter((name) => name !== filename)); // Update the filenames state after deletion
+        setSelectedFile(null); // Reset selected conversation
+      } catch (error) {
+        console.error("Error deleting conversation: ", error);
       }
     } else {
       alert("No user is logged in.");
@@ -167,11 +198,13 @@ export default function Conversations() {
             <List>
               <ListItemButton onClick={() => handleNavigation("/assistant")}>
                 <ListItemText primary="AI Assistant" />
+                <AssistantIcon />
               </ListItemButton>
               <ListItemButton
                 onClick={() => handleNavigation("/conversations")}
               >
                 <ListItemText primary="Conversations" />
+                <FolderIcon />
               </ListItemButton>
             </List>
           </Box>
@@ -183,8 +216,44 @@ export default function Conversations() {
             }}
           >
             {filenames.map((name, index) => (
-              <ListItemButton key={index} onClick={() => handleFileClick(name)}>
-                {name}
+              <ListItemButton
+                key={index}
+                onClick={() => handleFileClick(name)}
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between", // Ensures space between name and button
+                  alignItems: "center", // Aligns text and button vertically
+                }}
+              >
+                <Box
+                  sx={{
+                    flexGrow: 1, // Allows the name to take up remaining space
+                    marginRight: "16px", // Adds space between the filename and the button
+                  }}
+                >
+                  {name}
+                </Box>
+                <Button
+                  variant="contained"
+                  onClick={(event) => {
+                    event.stopPropagation(); // Prevent event from triggering ListItemButton
+                    handleDeleteConversation(name);
+                  }}
+                  aria-label={"Delete Conversation"}
+                  sx={{
+                    background: "#00FFFF",
+                    color: "#000",
+                    zIndex: 1201,
+                    padding: "3px 6px", // Shortens padding
+                    minWidth: "auto", // Ensures button only takes necessary space
+                    "&:hover": {
+                      backgroundColor: "#00CED1",
+                      boxShadow: "0 0 15px #00FFFF",
+                    },
+                  }}
+                >
+                  <DeleteIcon />
+                </Button>
               </ListItemButton>
             ))}
           </List>

@@ -30,7 +30,7 @@ export default function Assistant() {
     {
       role: "assistant",
       content:
-        "I am an AI-powered customer support assistant, how can I help you?",
+        "I am an AI-powered Stock Research Assistant, how can I help you?",
     },
   ]);
   const [chartOpen, setChartOpen] = useState(false);
@@ -97,6 +97,7 @@ export default function Assistant() {
         setStockData(filename, messages);
         updateFileName(filename);
         alert(`Conversation saved as ${filename}`);
+        handleClose();
       } else {
         alert("No user is logged in.");
       }
