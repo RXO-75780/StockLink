@@ -44,11 +44,19 @@ const SignInPage = () => {
         );
         setSuccessMessage("User registered successfully!");
         setIsNewUser(false);
+        clearTextfield();
       }
     } catch (error) {
       console.error("Sign-up error:", error);
       setError("Error signing up: " + error.message);
     }
+  };
+
+  const clearTextfield = () => {
+    setEmail("");
+    setPassword("");
+    setConforimPassword("");
+    setError("");
   };
 
   return (
@@ -223,7 +231,10 @@ const SignInPage = () => {
         </Button>
         <Button
           variant="outlined"
-          onClick={() => setIsNewUser(!isNewUser)}
+          onClick={() => {
+            setIsNewUser(!isNewUser);
+            clearTextfield();
+          }}
           fullWidth
           sx={{
             marginTop: 4,
