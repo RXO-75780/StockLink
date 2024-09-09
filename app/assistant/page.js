@@ -60,6 +60,10 @@ export default function Page() {
 
   const toggleChart = () => {
     setChartOpen(!chartOpen);
+
+    if (!chartOpen && drawerOpen) {
+      setDrawerOpen(false);
+    }
   };
 
   useEffect(() => {

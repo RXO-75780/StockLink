@@ -13,6 +13,7 @@ import { Box, Stack, TextField, Button, Typography } from "@mui/material";
 const SignInPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [conforimPassword, setConforimPassword] = useState("");
   const [isNewUser, setIsNewUser] = useState(false);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
@@ -20,13 +21,11 @@ const SignInPage = () => {
 
   const handleSignIn = async (e) => {
     try {
-      console.log("Attempting to sign In with:", email);
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
         password
       );
-      console.log("User signed in:", userCredential.user);
       setSuccessMessage("User signed in successfully!");
       router.push("/assistant");
     } catch (error) {
@@ -37,14 +36,15 @@ const SignInPage = () => {
 
   const handleSignUp = async (e) => {
     try {
-      console.log("Attempting to sign up with:", email);
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      console.log("User created:", userCredential.user);
-      setSuccessMessage("User registered successfully!");
+      if (password === conforimPassword) {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        setSuccessMessage("User registered successfully!");
+        setIsNewUser(false);
+      }
     } catch (error) {
       console.error("Sign-up error:", error);
       setError("Error signing up: " + error.message);
@@ -158,6 +158,42 @@ const SignInPage = () => {
             },
           }}
         />
+        {isNewUser ? (
+          <TextField
+            type="password"
+            value={conforimPassword}
+            onChange={(e) => setConforimPassword(e.target.value)}
+            placeholder="Confirm Password"
+            fullWidth
+            margin="normal"
+            sx={{
+              input: { color: "white" },
+              label: { color: "white" },
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: "white",
+                },
+                "&:hover fieldset": {
+                  borderColor: "#00FFFF",
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "#00FFFF",
+                },
+              },
+              "& .MuiInputLabel-root": {
+                color: "white",
+              },
+              "& .MuiInputLabel-root.Mui-focused": {
+                color: "#00FFFF",
+              },
+              "& .MuiInputLabel-root:hover": {
+                color: "#00FFFF",
+              },
+            }}
+          />
+        ) : (
+          ""
+        )}
         {error && (
           <Typography color="error" variant="body2">
             {error}

@@ -72,7 +72,11 @@ export default function Assistant() {
   };
 
   const handleClickOpen = () => {
-    setOpen(true);
+    if (messages.length > 1) {
+      setOpen(true);
+    } else {
+      alert("No conversation Started.");
+    }
   };
 
   const handleClose = () => {
